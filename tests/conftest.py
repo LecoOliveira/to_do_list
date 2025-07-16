@@ -11,6 +11,7 @@ from to_do_list.app import app
 from to_do_list.database import get_session
 from to_do_list.models import User, table_registry
 from to_do_list.security import get_password_hash
+from to_do_list.settings import Settings
 
 
 @pytest.fixture
@@ -99,8 +100,13 @@ def user_2(session):
 @pytest.fixture
 def token(client, user):
     response = client.post(
-        '/token/',
+        '/auth/token/',
         data={'username': user.email, 'password': user.clean_password},
     )
 
     return response.json()['access_token']
+
+
+@pytest.fixture
+def settings():
+    return Settings()

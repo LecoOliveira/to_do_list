@@ -6,7 +6,7 @@ from to_do_list.security import create_access_token
 
 def test_create_user(client):
     response = client.post(
-        '/user/',
+        '/users/',
         json={
             'username': 'alex',
             'email': 'alex@email.com',
@@ -24,7 +24,7 @@ def test_create_user(client):
 
 def test_create_user_username_exists(client, user):
     response = client.post(
-        '/user/',
+        '/users/',
         json={
             'username': user.username,
             'email': 'test@mail.com',
@@ -38,7 +38,7 @@ def test_create_user_username_exists(client, user):
 
 def test_create_user_email_exists(client, user):
     response = client.post(
-        '/user/',
+        '/users/',
         json={
             'username': 'test',
             'email': user.email,
@@ -114,7 +114,7 @@ def test_update_user_without_permissions(client, user, user_2, token):
 
 def test_update_user_if_user_exists(client, user, token):
     client.post(
-        '/user',
+        '/users/',
         json={
             'username': 'alex',
             'email': 'test@email.com',
@@ -158,7 +158,7 @@ def test_delete_user_without_permission(client, user, user_2, token):
 
 def test_get_token(client, user):
     response = client.post(
-        '/token',
+        '/auth/token',
         data={
             'username': user.email,
             'password': user.clean_password,
@@ -174,7 +174,7 @@ def test_get_token(client, user):
 
 def test_get_token_incorrect_password(client, user):
     response = client.post(
-        '/token',
+        '/auth/token',
         data={
             'username': user.email,
             'password': 'password_incorrect',
@@ -187,7 +187,7 @@ def test_get_token_incorrect_password(client, user):
 
 def test_get_token_incorrect_username(client, user):
     response = client.post(
-        '/token',
+        '/auth/token',
         data={
             'username': 'incorrect_username',
             'password': user.password,

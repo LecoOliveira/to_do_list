@@ -15,7 +15,7 @@ from to_do_list.settings import Settings
 
 pwd_context = PasswordHash.recommended()
 settings = Settings()
-oauth_scheme = OAuth2PasswordBearer(tokenUrl='token')
+oauth_scheme = OAuth2PasswordBearer(tokenUrl='auth/token')
 
 
 def get_password_hash(password: str):

@@ -3,12 +3,9 @@ from http import HTTPStatus
 from jwt import decode
 
 from to_do_list.security import create_access_token
-from to_do_list.settings import Settings
-
-settings = Settings()
 
 
-def test_jwt():
+def test_jwt(settings):
     data = {'test': 'test'}
     token = create_access_token(data)
 
