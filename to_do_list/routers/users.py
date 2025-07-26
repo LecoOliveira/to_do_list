@@ -114,9 +114,7 @@ async def update_user(
 
 @router.delete('/{user_id}', status_code=HTTPStatus.OK, response_model=Message)
 async def delete_user(
-    user_id: int,
-    session: Session,
-    current_user: CurrentUser
+    user_id: int, session: Session, current_user: CurrentUser
 ):
     if current_user.id != user_id:
         raise HTTPException(
